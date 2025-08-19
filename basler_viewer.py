@@ -12,16 +12,19 @@ def main():
     cam = pylon.InstantCamera(tlf.CreateFirstDevice())
     cam.Open()
 
-    # Optional: set pixel format if needed (many color Baslers default to Bayer)
+    # Optional: set pixel format if needed
     # from pypylon import genicam
-    # cam.PixelFormat.Value = "BGR8"  # or "BayerRG8" depending on your model
+    # cam.PixelFormat.Value = "BGR8"
 
     cam.StartGrabbing(pylon.GrabStrategy_LatestImageOnly)
     converter = pylon.ImageFormatConverter()
     converter.OutputPixelFormat = pylon.PixelType_BGR8packed
     converter.OutputBitAlignment = pylon.OutputBitAlignment_MsbAligned
 
+    # Create resizable window and set initial size
     cv2.namedWindow("Basler Camera", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("Basler Camera", 800, 600)  # <<< change size here
+
     print("Press 'q' to quit.")
 
     while cam.IsGrabbing():
@@ -34,7 +37,7 @@ def main():
 
             cv2.imshow("Basler Camera", img)
 
-            key = cv2.waitKey(10) & 0xFF  # use a bit longer delay
+            key = cv2.waitKey(10) & 0xFF
             if key == ord('q'):
                 break
         res.Release()
