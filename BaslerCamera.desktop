@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Basler Camera Viewer
+Comment=View Basler camera feed
+Exec=python3 ~/codes/basler_viewer/basler_viewer.py
+Terminal=false
+Type=Application
+Categories=Utility;
+
