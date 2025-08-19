@@ -23,7 +23,7 @@ def main():
 
     # Create resizable window and set initial size
     cv2.namedWindow("Basler Camera", cv2.WINDOW_NORMAL)
-    cv2.resizeWindow("Basler Camera", 800, 600)  # <<< change size here
+    cv2.resizeWindow("Basler Camera", 1500, 900)  # <<< change size here
 
     print("Press 'q' to quit.")
 
