@@ -21,13 +21,21 @@ def main():
     converter.OutputPixelFormat = pylon.PixelType_BGR8packed
     converter.OutputBitAlignment = pylon.OutputBitAlignment_MsbAligned
 
+    cv2.namedWindow("Basler Camera", cv2.WINDOW_NORMAL)
     print("Press 'q' to quit.")
+
     while cam.IsGrabbing():
         res = cam.RetrieveResult(5000, pylon.TimeoutHandling_ThrowException)
         if res.GrabSucceeded():
             img = converter.Convert(res).GetArray()
+
+            # Rotate 180 degrees
+            img = cv2.rotate(img, cv2.ROTATE_180)
+
             cv2.imshow("Basler Camera", img)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+
+            key = cv2.waitKey(10) & 0xFF  # use a bit longer delay
+            if key == ord('q'):
                 break
         res.Release()
 
@@ -37,4 +45,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
