@@ -2,6 +2,7 @@
 Name=Basler Camera Viewer
 Comment=View Basler camera feed
 Exec=python3 ~/codes/basler_viewer/basler_viewer.py
+Icon=~/codes/basler_viewer/basler.png
 Terminal=false
 Type=Application
 Categories=Utility;
