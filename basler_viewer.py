@@ -23,7 +23,9 @@ def main():
 
     # Create resizable window and set initial size
     cv2.namedWindow("Basler Camera", cv2.WINDOW_NORMAL)
-    cv2.resizeWindow("Basler Camera", 1500, 900)
+    cv2.resizeWindow("Basler Camera", 1200, 800)  # <<< change size here
+
+    print("Press 'q' to quit.")
 
     while cam.IsGrabbing():
         res = cam.RetrieveResult(5000, pylon.TimeoutHandling_ThrowException)
@@ -35,10 +37,9 @@ def main():
 
             cv2.imshow("Basler Camera", img)
 
-            # Exit if user clicks the X button on the window
-            if cv2.getWindowProperty("Basler Camera", cv2.WND_PROP_VISIBLE) < 1:
+            key = cv2.waitKey(10) & 0xFF
+            if key == ord('q'):
                 break
-
         res.Release()
 
     cam.StopGrabbing()
